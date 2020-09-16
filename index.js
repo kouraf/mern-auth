@@ -13,19 +13,22 @@ app.use(cors());
 
 const PORT = process.env.PORT || 5001;
 
-app.listen(PORT,() => console.log(`The server is running in ${PORT}`));
+app.listen(PORT, () => console.log(`The server is running in ${PORT}`));
 
 // set up mongoose
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING,
-    {useNewUrlParser:true,
-    useUnifiedTopology:true},
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+    },
     (err) => {
-        if(err) throw err;
+        if (err) throw err;
         else console.log("mongoDB connected !")
     })
 
 
 // set up routes
 
-app.use('/users',require("./routes/userRouter"));
+app.use('/users', require("./routes/userRouter"));
